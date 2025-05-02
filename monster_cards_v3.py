@@ -1,6 +1,6 @@
 """Monster Cards - v3
 Program to store monster cards and allow user to interact with cards
-function to search for a card added
+function to create a new monster card added
 Created by Charlotte Lim"""
 
 import easygui
@@ -111,6 +111,48 @@ def find_card():
 
     return print_card
 
+def add_card():
+    name = easygui.enterbox("What is the name of this monster?",
+                            "Monster name").title()
+
+    strength = easygui.integerbox(f"What is {name}'s strength level?"
+                                  f"\n\nEnter a number from 1 to 25",
+                                  "Strength level",
+                                  "",1, 25)
+
+    speed = easygui.integerbox(f"What is {name}'s speed level?"
+                                  f"\n\nEnter a number from 1 to 25",
+                                  "Speed level",
+                                  "", 1, 25)
+
+    stealth = easygui.integerbox(f"What is {name}'s stealth level?"
+                                  f"\nEnter a number from 1 to 25",
+                                  "Stealth level",
+                                  "", 1, 25)
+
+    cunning = easygui.integerbox(f"What is {name}'s cunning level?"
+                                  f"\nEnter a number from 1 to 25",
+                                  "Cunning level",
+                                  "", 1, 25)
+
+    new_monster = {
+        "Strength": strength,
+        "Speed": speed,
+        "Stealth": stealth,
+        "Cunning:": cunning
+    }
+
+    catalogue[name] = new_monster
+
+    print_card = ""
+    for card, card_info in catalogue.items():
+        if card == name:
+            print_card += f"\n--------[ {name} Card ]--------\n"
+            for key in card_info:
+                print_card += f"{key}: {card_info[key]}\n"
+
+    return print_card
+
 def main_routine():
     """Function to run main routine"""
     while True: # while loop to allow the user to keep making choices unless
@@ -121,6 +163,7 @@ def main_routine():
                                    "Actions",
                                    choices=["Output all cards",
                                             "Search for existing card",
+                                            "Add a new card",
                                             "Quit"])
         if choice == "Output all cards":
             output_all() # calls the function to output all cards in catalogue
@@ -128,6 +171,8 @@ def main_routine():
         elif choice == "Search for existing card":
             # calls the function to find an existing card and outputs the details
             easygui.msgbox(find_card(), "Card info")
+        elif choice == "Add a new card":
+            easygui.msgbox(add_card(), "Add a new card")
         else:
             quit() # quits the entire program
 
