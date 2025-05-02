@@ -1,6 +1,6 @@
 """Monster Cards - v2
 Program to store monster cards and allow user to interact with cards
-function to search for a card added
+function to search for a card added (trial a)
 Created by Charlotte Lim"""
 
 import easygui
@@ -89,23 +89,42 @@ def output_all():
 def find_card():
     """Function to allow user to search for existing card in the catalogue and
     return card information"""
-    cards = [] # to store all cards in catalogue
+    cards_list = [] # to store all cards in catalogue
+    cards_string = "----[ Monster cards in deck: ]----"
 
     # appends all cards in catalogue to cards
     for card in catalogue:
-        cards.append(card)
+        cards_list.append(card)
 
-    print_card = ""
+    print_card = "" # string to store card details
 
-    find = easygui.choicebox("What is the name of the card you would like to find?",
-                             "Find a card",
-                             choices = cards)
+    # for loop to add each card to all_cards string
+    for card in cards_list:
+        cards_string += f"\n        {card}"
 
-    for card, card_info in catalogue.items():
-        if card == find:
-            print_card += f"\n--------[ {find} Card ]--------\n"
-            for key in card_info:
-                print_card += f"{key}: {card_info[key]}\n"
+    find = ""
+    while not find:
+        # allows the user to find and choose card from catalogue
+        find = easygui.enterbox(f"{cards_string}\n"
+                                f"\nWhat is the name of the card you would "
+                                f"like to see the details of?",
+                                 "Find a card").title()
+
+        # adds and formats details in print_card string
+        for card, card_info in catalogue.items():
+            if card == find:
+                print_card += f"\n--------[ {find} Card ]--------\n"
+                for key in card_info:
+                    print_card += f"{key}: {card_info[key]}\n"
+
+        # if user input is not applicable, user gets another chance to enter
+        # correct card
+        if find not in cards_list:
+            easygui.msgbox("The card you have entered does not exist."
+                        "\nPlease read the list carefully, check the spelling,"
+                           " and try again",
+                           "Card not found")
+            find = ""
 
     return print_card
 
