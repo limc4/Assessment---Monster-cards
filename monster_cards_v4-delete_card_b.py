@@ -1,6 +1,6 @@
 """Monster Cards - v4
 Program to store monster cards and allow user to interact with cards
-function to delete existing monster card from catalogue trial 2
+function to delete existing monster card from catalogue added
 Created by Charlotte Lim"""
 
 import easygui
@@ -172,10 +172,10 @@ def delete_card():
     else:
         while not del_card:
             # allows the user to find and choose card from catalogue
-            del_card = easygui.enterbox(f"{cards_string}\n"
-                                    f"\nWhat is the name of the card you would "
-                                    f"like to delete?",
-                                    "Which card to delete?").title()
+            del_card = easygui.choicebox(f"What is the name of the card you "
+                                         f"would like to delete?",
+                                    "Which card to delete?",
+                                         choices = cards_list).title()
 
         if del_card in catalogue:
             output = f"{del_card} Card found and deleted."
