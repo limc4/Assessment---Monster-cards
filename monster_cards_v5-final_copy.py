@@ -98,7 +98,8 @@ def find_card():
     print_card = "" # string to store card details
 
     # allows the user to find and choose card from catalogue
-    find = easygui.choicebox("What is the name of the card you would like to find?",
+    find = easygui.choicebox("What is the name of the card you would "
+                             "like to find?",
                              "Find a card",
                              choices = cards)
 
@@ -217,7 +218,8 @@ def main_routine():
             output_all() # calls the function to output all cards in catalogue
 
         elif choice == "Search for existing card":
-            # calls the function to find an existing card and outputs the details
+            # calls the function to find an existing card and outputs the
+            # details
             easygui.msgbox(find_card(), "Card info")
         elif choice == "Add a new card":
             easygui.msgbox(add_card(), "Add a new card")
