@@ -1,7 +1,9 @@
-"""Monster Cards - v5 - final
-Program to store monster cards and allow user to interact with cards
-function to delete existing monster card from catalogue more efficient
-Created by Charlotte Lim"""
+"""Monster Cards - v5 - final.
+
+Program to store monster cards and allow user to interact with cards.
+
+Created by Charlotte Lim.
+"""
 
 import easygui
 
@@ -57,7 +59,7 @@ catalogue = \
             "Cunning": 12
         },
         "Froststep": {
-            "Strength":14,
+            "Strength": 14,
             "Speed": 14,
             "Stealth": 17,
             "Cunning": 4
@@ -69,12 +71,13 @@ catalogue = \
             "Cunning": 2
         },
 
-}
+    }
+
 
 def output_all():
     """Function to output all cards in monster cards catalogue into Python
-    console"""
-
+    console.
+    """
     # heading for output
     all_cards = "========[ Monster cards in the deck ]========\n"
 
@@ -86,16 +89,18 @@ def output_all():
 
     print(all_cards)
 
+
 def find_card():
     """Function to allow user to search for existing card in the catalogue and
-    return card information"""
-    cards = [] # to store all cards in catalogue
+    return card information.
+    """
+    cards = []  # to store all cards in catalogue
 
     # appends all cards in catalogue to cards
     for card in catalogue:
         cards.append(card)
 
-    print_card = "" # string to store card details
+    print_card = ""  # string to store card details
 
     # allows the user to find and choose card from catalogue
     find = easygui.choicebox("What is the name of the card you would "
@@ -112,8 +117,11 @@ def find_card():
 
     return print_card
 
-def add_card():
 
+def add_card():
+    """Function to allow user to add a new monster card to the catalogue and
+    return new card details.
+    """
     # allows user to input the name of their new monster card
     name = easygui.enterbox("What is the name of this monster?",
                             "Monster name").title()
@@ -123,7 +131,7 @@ def add_card():
     strength = easygui.integerbox(f"What is {name}'s strength level?"
                                   f"\n\nEnter a number from 1 to 25",
                                   "Strength level",
-                                  "",1, 25)
+                                  "", 1, 25)
 
     # allows user to input the speed level of their new monster card
     # (from 1-25)
@@ -167,7 +175,11 @@ def add_card():
 
     return print_card
 
+
 def delete_card():
+    """Function to allow user to delete a card from catalogue and print
+    updated catalogue into the Python console.
+    """
     cards_list = []  # to store all cards in catalogue
     cards_string = "----[ Monster cards in deck: ]----"
     output = ""
@@ -180,20 +192,22 @@ def delete_card():
     for card in cards_list:
         cards_string += f"\n        {card}"
 
-    if catalogue == {}: # no cards to delete if the catalogue is empty
+    if catalogue == {}:  # no cards to delete if the catalogue is empty
         output = "The catalogue is empty.\n\nThere are no cards to delete"
     else:
-            # allows the user to find and choose card from catalogue
+        # allows the user to find and choose card from catalogue
         del_card = easygui.choicebox(f"What is the name of the card you "
                                      f"would like to delete?",
-                                "Which card to delete?",
-                                     choices = cards_list).title()
+                                    "Which card to delete?",
+                                     choices = cards_list)
 
+        # checks if del_card is in catalogue and outputs updated catalogue
         if del_card in catalogue:
             output = f"{del_card} Card found and deleted."
             del catalogue[del_card]
             output += ("\n\nThe updated catalogue has been printed in the "
-                       f"Python Console.")
+                       "Python Console.")
+
         elif del_card not in catalogue:
             output = f"{del_card} Card does not exist\n\n"
 
@@ -201,10 +215,11 @@ def delete_card():
 
     return output
 
+
 def main_routine():
-    """Function to run main routine"""
-    while True: # while loop to allow the user to keep making choices unless
-                # user quits the program
+    """Function to run main routine."""
+    while True:  # while loop to allow the user to keep making choices unless
+                 # user quits the program
 
         # buttonbox used to limit errors
         choice = easygui.buttonbox("What would you like to do?",
@@ -214,19 +229,27 @@ def main_routine():
                                             "Add a new card",
                                             "Delete existing card",
                                             "Quit"])
+
         if choice == "Output all cards":
-            output_all() # calls the function to output all cards in catalogue
+            # calls the function to output all cards in catalogue
+            output_all()
 
         elif choice == "Search for existing card":
             # calls the function to find an existing card and outputs the
             # details
             easygui.msgbox(find_card(), "Card info")
+
         elif choice == "Add a new card":
+            # calls the function to add a new card to the catalogue
             easygui.msgbox(add_card(), "Add a new card")
+
         elif choice == "Delete existing card":
+            # calls the function to delete existing card from the catalogue
             easygui.msgbox(delete_card(), "Delete a card")
+
         else:
-            quit() # quits the entire program
+            quit()  # quits the entire program
+
 
 # Main routine
 main_routine()
