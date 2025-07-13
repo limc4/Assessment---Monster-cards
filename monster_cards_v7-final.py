@@ -127,9 +127,15 @@ def add_card():
     # allows user to input the name of their new monster card
     name = None
     name = easygui.enterbox("What is the name of this monster?",
-                            "Monster name")
+                            "Monster name", "New Monster")
+
+    while name in catalogue:
+        name = easygui.enterbox("This name already belongs to another monster"
+                                "\nPlease choose a new name")
+
     if name is None:
         return cancelled
+
 
     # allows user to input the strength level of their new monster card
     # (from 1-25)
